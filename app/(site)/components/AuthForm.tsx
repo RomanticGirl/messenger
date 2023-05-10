@@ -11,7 +11,7 @@ import {
 import AuthSocialButton from "./AuthSocialButton";
 import { IconBaseProps } from "react-icons";
 
-import { BsGithub } from 'react-icons/bs';
+import { BsGithub, BsGoogle } from 'react-icons/bs';
 
 type Variant = 'LOGIN' | 'REGISTER';
 
@@ -88,6 +88,7 @@ const AuthForm = () => {
                             label="Name"
                             register={register}
                             errors={errors}
+                            disabled={isLoading}
                         />
                     )}
                     <Input
@@ -96,6 +97,7 @@ const AuthForm = () => {
                         type="email"
                         register={register}
                         errors={errors}
+                        disabled={isLoading}
                     />
                     <Input
                         id="password"
@@ -103,6 +105,7 @@ const AuthForm = () => {
                         type="password"
                         register={register}
                         errors={errors}
+                        disabled={isLoading}
                     />
                     <div>
                         <Button
@@ -114,7 +117,6 @@ const AuthForm = () => {
                         </Button>
                     </div>
                 </form>
-
                 <div className="mt-6">
                     <div className="relative">
                         <div className="
@@ -148,15 +150,40 @@ const AuthForm = () => {
                             </span>
                         </div>
                     </div>
-
                     <div className="
                     mt-6 
                     flex 
                     gap-2
                     ">
-                        <AuthSocialButton icon={BsGithub} />
+                        <AuthSocialButton
+                            icon={BsGithub}
+                            onClick={() => socialAction('github')}
+                        />
+                        <AuthSocialButton
+                            icon={BsGoogle}
+                            onClick={() => socialAction('google')}
+                        />
                     </div>
+                </div>
 
+                <div className="
+                        flex
+                        gap-2
+                        justify-center
+                        text-sm
+                        mt-6
+                        px-2
+                        text-gray-500
+                        ">
+                    <div>
+                        {variant === 'LOGIN' ? 'New to Messenger?' : 'Already have an account?'}
+                    </div>
+                    <div
+                        onClick={toggleVariant}
+                        className="underline cursor-pointer"
+                    >
+                        {variant === 'LOGIN' ? 'Create an account' : 'Login'}
+                    </div>
                 </div>
             </div>
         </div >
